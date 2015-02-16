@@ -1,5 +1,6 @@
-# Compile using -o flag making a .a file.
+*.o
 *.a
+*.h.gch
 
 # Push this file
 # .gitignore
