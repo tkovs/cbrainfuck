@@ -24,3 +24,10 @@ void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char*
 		exit(1);
 	}
 }
+
+void initialize(List *element)
+{
+	element->value = 0;
+	element->next = NULL;
+	element->prev = NULL;
+}

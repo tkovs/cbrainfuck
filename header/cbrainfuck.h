@@ -1,15 +1,13 @@
-#ifndef CBRAINFUCK_H
-#define CBRAINFUCK_H
-
-#include <stdlib.h>
-
 /******************** WELCOME! *********************
 ** Header of functions implemented in cbrainfuck.c
 ** that serve to manage a doubly linked list with
 ** specific roles to interprete a brainfuck code.
 ****************************************************/
 
+#ifndef CBRAINFUCK_INCLUDED
+#define CBRAINFUCK_INCLUDED
 
+#include <stdlib.h>
 
 /********************* mylist **********************
 ** Struct of my list
@@ -37,5 +35,15 @@ struct mylist {
 */
 
 void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name);
+
+/******************* initialize ********************
+** This function just initializes the list data
+**
+** value = 0
+** next = NULL
+** prev = NULL
+*/
+
+void initialize(List *element);
 
 #endif
