@@ -1,6 +1,8 @@
 #ifndef CBRAINFUCK_H
 #define CBRAINFUCK_H
 
+#include <stdlib.h>
+
 /******************** WELCOME! *********************
 ** Header of functions implemented in cbrainfuck.c
 ** that serve to manage a doubly linked list with

@@ -3,8 +3,8 @@
 
 int main() {
 	FILE *finput, *fcode;
-	char *iname = "../txt/input.txt";
-	char *cname = "../txt/code.txt";
+	char *iname = "txt/input.txt";
+	char *cname = "txt/code.txt";
 
 	open_files(&fcode, cname, &finput, iname);
 

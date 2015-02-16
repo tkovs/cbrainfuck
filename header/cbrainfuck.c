@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "cbrainfuck.h"
 
 void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
@@ -8,14 +9,12 @@ void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char*
 	if ((*code_file) != NULL)
 	{
 		(*input_file) = fopen(input_file_name, "r");
+		if ((*input_file) == NULL)
 		{
-			if ((*input_file) != NULL)
-			{
-				fclose(code_file);
-				printf ("\nCouldn't open input file [%s]\n", input_file_name);
-				scanf ("%*c");
-				exit(1);
-			}
+			fclose((*code_file));
+			printf ("\nCouldn't open input file [%s]\n", input_file_name);
+			scanf ("%*c");
+			exit(1);
 		}
 	}
 	else
