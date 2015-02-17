@@ -1,5 +1,6 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "cbrainfuck.h"
 
 void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
@@ -37,8 +38,7 @@ void create(List *list)
 	List *newlist;
 
 	newlist = (List *) malloc (sizeof(List));
-	newlist->value = 0;
-    newlist->next = NULL;
+	initialize(newlist);
 
 	newlist->prev = list;
 	list->next = newlist;
@@ -46,15 +46,6 @@ void create(List *list)
 
 void liberate(List *list)
 {
-	static char i = 0;
-	if (i == 0)
-	{
-		while (list->prev != NULL)
-		{
-			list = list->prev;
-		}
-	}
-
 	if (list != NULL)
 	{
 		liberate(list->next);
@@ -62,27 +53,30 @@ void liberate(List *list)
 	}
 }
 
-void interpreter(char* code_file_name, char* input_file_name)
+char* interpreter(char* code_file_name, char* input_file_name)
 {
 	FILE *fcode = NULL;
 	FILE *finput = NULL;
 	int *brackets = NULL;
 	List *fuckinglist = NULL;
-	char c; //
-	short int count = 0; // Number of scans
+	char c; // to scan
+	char *result; // Message from code
+	short int countscan = 0; // Number of scans
 	short int length = 0; // Number of bracket '['
+	short int countpoint = 1; // Number of '.'
 
-	brackets = (int *) malloc (sizeof(int));
-	
 	open_files(&fcode, code_file_name, &finput, input_file_name);
 
-	fuckinglist = (List *) malloc (sizeof(List));
+	result = (char *) malloc (countpoint * sizeof(char));
+	result[countpoint-1] = '\0';
+	brackets = (int *) malloc (sizeof(int));
+	fuckinglist = (List *) malloc (2 * sizeof(List));
 	initialize(fuckinglist);
 
 	while(!feof(fcode))
 	{
 		fscanf (fcode, "%c", &c);
-		count++;
+		countscan++;
 
 		switch(c)
 		{
@@ -107,7 +101,10 @@ void interpreter(char* code_file_name, char* input_file_name)
 				break;
 
 			case '.':
-				printf ("%c", fuckinglist->value);
+				countpoint++;
+				result = (char *) realloc (result, countpoint * sizeof(char));
+				sprintf(result, "%s%c", result, fuckinglist->value);
+				result[countpoint-1] = '\0';
 				break;
 
 			case ',':
@@ -117,14 +114,14 @@ void interpreter(char* code_file_name, char* input_file_name)
 			case '[':
 				length++;
 				brackets = (int *) realloc (brackets, length * sizeof(int));
-				brackets[length-1] = count;
+				brackets[length-1] = countscan;
 				break;
 
 			case ']':
 				if (fuckinglist->value > 0)
 				{
 					fseek(fcode, brackets[length-1], SEEK_SET);
-					count = brackets[length-1];
+					countscan = brackets[length-1];
 				}
 				else if (fuckinglist->value == 0)
 				{
@@ -135,7 +132,14 @@ void interpreter(char* code_file_name, char* input_file_name)
 		}
 	}
 
+
+	while (fuckinglist->prev != NULL)
+		fuckinglist = fuckinglist->prev;
 	liberate(fuckinglist);
+
 	fclose(fcode);
 	fclose(finput);
+
+	result[countpoint-1] = '\0';
+	return result;
 }
