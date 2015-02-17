@@ -5,3 +5,4 @@ Start: 02/15/2015
 End: 02/17/2015
 
 How to use:
+![How-to-use](https://github.com/tkovs/cbrainfuck/blob/master/images/how-to-use.png) 
