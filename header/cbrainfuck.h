@@ -64,4 +64,13 @@ void create(List *element);
 
 void liberate(List *element);
 
+/********************** inteprete ***********************
+** This function frees all memory used by the list using
+** recursion.
+** 
+** element: the list made in main.c
+*/
+
+void interprete(char* code_file_name, char* input_file_name);
+
 #endif

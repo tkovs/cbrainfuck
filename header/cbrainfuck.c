@@ -46,11 +46,96 @@ void create(List *list)
 
 void liberate(List *list)
 {
-	printf ("\ntest");
+	static char i = 0;
+	if (i == 0)
+	{
+		while (list->prev != NULL)
+		{
+			list = list->prev;
+		}
+	}
 
 	if (list != NULL)
 	{
 		liberate(list->next);
 		free(list);
 	}
+}
+
+void interpreter(char* code_file_name, char* input_file_name)
+{
+	FILE *fcode = NULL;
+	FILE *finput = NULL;
+	int *brackets = NULL;
+	List *fuckinglist = NULL;
+	char c; //
+	short int count = 0; // Number of scans
+	short int length = 0; // Number of bracket '['
+
+	brackets = (int *) malloc (sizeof(int));
+	
+	open_files(&fcode, code_file_name, &finput, input_file_name);
+
+	fuckinglist = (List *) malloc (sizeof(List));
+	initialize(fuckinglist);
+
+	while(!feof(fcode))
+	{
+		fscanf (fcode, "%c", &c);
+		count++;
+
+		switch(c)
+		{
+			case '+':
+				fuckinglist->value++;
+				break;
+
+			case '-':
+				fuckinglist->value--;
+				break;
+
+			case '>':
+				if (fuckinglist->next == NULL)
+				{
+					create(fuckinglist);
+				}
+				fuckinglist = fuckinglist->next;
+				break;
+
+			case '<':
+				fuckinglist = fuckinglist->prev;
+				break;
+
+			case '.':
+				printf ("%c", fuckinglist->value);
+				break;
+
+			case ',':
+				fscanf (finput, "%c", &fuckinglist->value);
+				break;
+
+			case '[':
+				length++;
+				brackets = (int *) realloc (brackets, length * sizeof(int));
+				brackets[length-1] = count;
+				break;
+
+			case ']':
+				if (fuckinglist->value > 0)
+				{
+					fseek(fcode, brackets[length-1], SEEK_SET);
+					count = brackets[length-1];
+				}
+				else if (fuckinglist->value == 0)
+				{
+					length--;
+					brackets = (int *) realloc (brackets, length * sizeof(int));
+				}
+				break;
+		}
+	}
+
+	liberate(fuckinglist);
+	fclose(fcode);
+	fclose(finput);
 }
