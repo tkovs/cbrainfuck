@@ -9,10 +9,25 @@ int main() {
 	initialize(fuckinglist);
 
 	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
+	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
+	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
+	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
+	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
+	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
+	create(fuckinglist);
+	fuckinglist = fuckinglist->next;
 	create(fuckinglist);
 
 	printf ("fuckinglist.value = [%d]\n", fuckinglist->value);
 
+	while (fuckinglist->prev != NULL)
+    	fuckinglist = fuckinglist->prev;
 	liberate(fuckinglist);
 	return 0;
 }

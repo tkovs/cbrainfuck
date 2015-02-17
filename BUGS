@@ -1,8 +1,7 @@
 =================
 Fixed
 
+1. liberate function don't frees all list apparently
 
 =================
 Not fixed
-
-1. liberate function don't frees all list apparently
