@@ -1,0 +1,8 @@
+=================
+Fixed
+
+
+=================
+Not fixed
+
+1. liberate function don't frees all list apparently

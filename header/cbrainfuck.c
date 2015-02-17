@@ -25,9 +25,32 @@ void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char*
 	}
 }
 
-void initialize(List *element)
+void initialize(List *list)
 {
-	element->value = 0;
-	element->next = NULL;
-	element->prev = NULL;
+	list->value = 0;
+	list->next = NULL;
+	list->prev = NULL;
+}
+
+void create(List *list)
+{
+	List *newlist;
+
+	newlist = (List *) malloc (sizeof(List));
+	newlist->value = 0;
+    newlist->next = NULL;
+
+	newlist->prev = list;
+	list->next = newlist;
+}
+
+void liberate(List *list)
+{
+	printf ("\ntest");
+
+	if (list != NULL)
+	{
+		liberate(list->next);
+		free(list);
+	}
 }
