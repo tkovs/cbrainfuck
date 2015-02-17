@@ -5,3 +5,8 @@ Fixed
 
 =================
 Not fixed
+
+2. There is a problem in the interpreter function:
+there is just "countpoint++" in the "case '.':" but
+the amount of point in the input.txt is much smaller
+than countpoint.
