@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cbrainfuck.h"
+#include "../include/cbrainfuck.h"
 
-void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
+int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
 {
 	(*code_file) = fopen(code_file_name, "r");
 
@@ -12,18 +12,22 @@ void open_files(FILE** code_file, char* code_file_name, FILE** input_file, char*
 		(*input_file) = fopen(input_file_name, "r");
 		if ((*input_file) == NULL)
 		{
+			_ERRORS_++;
+
 			fclose((*code_file));
-			printf ("\nCouldn't open input file [%s]\n", input_file_name);
-			scanf ("%*c");
-			exit(1);
+			report ("Couldn't open input file");
+			return 1;
 		}
 	}
 	else
 	{
-		printf ("\nCouldn't open code file [%s]\n", code_file_name);
-		scanf ("%*c");
-		exit(1);
+		_ERRORS_++;
+
+		report ("Couldn't open code file");
+		return 1;
 	}
+
+	return 0;
 }
 
 void initialize(List *list)
@@ -55,6 +59,10 @@ void liberate(List *list)
 
 char* interpreter(char* code_file_name, char* input_file_name)
 {
+	_ERRORS_ = 0;
+	free(_MESSAGE_);
+	_MESSAGE_ = NULL;
+
 	FILE *fcode = NULL;
 	FILE *finput = NULL;
 	int *brackets = NULL;
@@ -65,7 +73,10 @@ char* interpreter(char* code_file_name, char* input_file_name)
 	short int length = 0; // Number of bracket '['
 	short int countpoint = 1; // Number of '.'
 
-	open_files(&fcode, code_file_name, &finput, input_file_name);
+	if (open_files(&fcode, code_file_name, &finput, input_file_name) == 1)
+	{
+		return NULL;
+	}
 
 	result = (char *) malloc (countpoint * sizeof(char));
 	result[countpoint-1] = '\0';
@@ -142,4 +153,8 @@ char* interpreter(char* code_file_name, char* input_file_name)
 
 	result[countpoint-1] = '\0';
 	return result;
+}
+
+void report(char *msg) {
+	_MESSAGE_ = msg;
 }
