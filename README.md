@@ -19,6 +19,13 @@ Contributing
 
 See [Contributing](CONTRIBUTING.md)
 
+Issues
+--------
+
+Maybe I have issues... Can you help me?
+
+    [Issues](https://github.com/tkovs/cbrainfuck/issues)
+
 How to use
 --------
 
