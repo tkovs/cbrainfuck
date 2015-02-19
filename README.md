@@ -1,9 +1,14 @@
-A brainfuck interpreter made in C language.
+A brainfuck interpreter.
 ========
 
-:Author: Vitor Rodrigues (victor.rdg@hotmail.com)
+##A brainfuck interpreter made in C language.
 
-This is the project I chose to do as a way to learn how to use git and github.
+```
+Author: Vitor Rodrigues (victor.rdg@hotmail.com)
+[My facebook!] (https://www.facebook.com/joaovitorIFAL)
+```
+
+*This is the project I chose to do as a way to learn how to use git and github.*
 
 How to use:
 ![How-to-use](https://github.com/tkovs/cbrainfuck/blob/master/images/how-to-use.png) 
