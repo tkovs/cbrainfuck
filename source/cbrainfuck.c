@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../included/cbrainfuck.h"
+#include "../include/cbrainfuck.h"
 
 int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
 {
