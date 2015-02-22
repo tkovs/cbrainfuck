@@ -111,9 +111,10 @@ char* interpreter(char* code_file_name, char* input_file_name)
 				break;
 
 			case '.':
+				if (fuckinglist->value == 0) break;
+				result[countpoint-1] = fuckinglist->value;
 				countpoint++;
 				result = (char *) realloc (result, countpoint * sizeof(char));
-				sprintf(result, "%s%c", result, fuckinglist->value);
 				result[countpoint-1] = '\0';
 				break;
 
