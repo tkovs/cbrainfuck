@@ -111,9 +111,10 @@ char* interpreter(char* code_file_name, char* input_file_name)
 				break;
 
 			case '.':
+				if (fuckinglist->value == 0) break;
+				result[countpoint-1] = fuckinglist->value;
 				countpoint++;
 				result = (char *) realloc (result, countpoint * sizeof(char));
-				sprintf(result, "%s%c", result, fuckinglist->value);
 				result[countpoint-1] = '\0';
 				break;
 
@@ -122,18 +123,30 @@ char* interpreter(char* code_file_name, char* input_file_name)
 				break;
 
 			case '[':
+				if (fuckinglist->value == 0) {
+					int nested = 1;
+					while(nested) {
+						char c1;
+						fscanf (fcode, "%c", &c1);
+						countscan++;
+						if (c1 == '[') nested++;
+						if (c1 == ']') nested--;
+					}
+				    break;
+				}
+
 				length++;
 				brackets = (int *) realloc (brackets, length * sizeof(int));
 				brackets[length-1] = countscan;
 				break;
 
 			case ']':
-				if (fuckinglist->value > 0)
+				if (fuckinglist->value != 0)
 				{
 					fseek(fcode, brackets[length-1], SEEK_SET);
 					countscan = brackets[length-1];
 				}
-				else if (fuckinglist->value == 0)
+				else
 				{
 					length--;
 					brackets = (int *) realloc (brackets, length * sizeof(int));
