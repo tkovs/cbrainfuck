@@ -83,9 +83,8 @@ char* interpreter(char* code_file_name, char* input_file_name)
 	fuckinglist = (List *) malloc (2 * sizeof(List));
 	initialize(fuckinglist);
 
-	while(!feof(fcode))
+	while((c = fgetc(fcode)) != EOF)
 	{
-		fscanf (fcode, "%c", &c);
 		countscan++;
 
 		switch(c)
