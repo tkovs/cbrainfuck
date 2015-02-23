@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>cBrainfuck by tkovs</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>cBrainfuck</h1>
+        <h2>A brainfuck interpreter made in C.</h2>
+        <a href="https://github.com/tkovs/cbrainfuck" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h2>
+<a id="what" class="anchor" href="#what" aria-hidden="true"><span class="octicon octicon-link"></span></a>What</h2>
+
+<p>This is the project I chose to do just as a way to learn how to use git and github.</p>
+
+<p>You can fork and pull request. You welcome!</p>
+
+<h2>
+<a id="me" class="anchor" href="#me" aria-hidden="true"><span class="octicon octicon-link"></span></a>Me</h2>
+
+<pre><code>Vitor Rodrigues
+victor.rdg@hotmail.com
+</code></pre>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>As I do not have much experience with advanced C language, the code is easy to read and understand. So <em>anyone</em> can contribute, needs to know just how brainfuck works and the reasoning used to implement the interpreter.</p>
+
+<p>See <a href="CONTRIBUTING.md">Contributing</a></p>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<p>Need only the source and include folders in your project folder.
+Add your program in your project folder.
+In your code, reference the <em>include/cbrainfuck.h</em> file.
+Create a text file with the brainfuck code.
+Create a text file with content to be read when a comma is found in brainfuck code (or use <em>/dev/stdin</em> in linux).</p>
+
+<p>In your C code to call the interpreter function. The interpreter function returns a string with the result of the interpretation of brainfuck code. The interpreter function takes two parameters: the first is the address of the text file and the second the address of the input file (or <em>/dev/stdin</em>).</p>
+
+<p>A example:</p>
+
+<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>stdio.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>stdlib.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">"</span>include/cbrainfuck.h<span class="pl-pds">"</span></span>
+
+<span class="pl-c">// If the program was generated main.a, so</span>
+<span class="pl-c">// $./main.a code.txt</span>
+<span class="pl-st">int</span> <span class="pl-en">main</span>(<span class="pl-st">int</span> argc, <span class="pl-st">char</span> ** argv) {
+    <span class="pl-st">char</span> *s;
+    s = <span class="pl-s3">interpreter</span>(argv[<span class="pl-c1">1</span>], argc&gt;<span class="pl-c1">2</span>?argv[<span class="pl-c1">2</span>]:<span class="pl-s1"><span class="pl-pds">"</span>/dev/stdin<span class="pl-pds">"</span></span>);
+
+    <span class="pl-k">if</span> (_ERRORS_ &gt; <span class="pl-c1">0</span>) {
+        <span class="pl-s3">fprintf</span>(stderr, <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, _MESSAGE_);
+        <span class="pl-k">return</span> <span class="pl-c1">1</span>;
+    } <span class="pl-k">else</span> {
+        <span class="pl-s3">printf</span> (<span class="pl-s1"><span class="pl-pds">"</span><span class="pl-c1">%s</span><span class="pl-pds">"</span></span>, s);
+        <span class="pl-s3">free</span>(s);
+    }
+
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/tkovs/cbrainfuck/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/tkovs/cbrainfuck/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/tkovs/cbrainfuck"></a> is maintained by <a href="https://github.com/tkovs">tkovs</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
