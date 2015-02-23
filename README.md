@@ -1,7 +1,4 @@
 A brainfuck interpreter.
 ========
 
-Informations
-------------
-
-Informations [here](http://tkovs.github.io/cbrainfuck/).
+###[Informations](http://tkovs.github.io/cbrainfuck/).
