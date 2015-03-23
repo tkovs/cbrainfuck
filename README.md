@@ -4,14 +4,6 @@ This is the project I chose to do just as a way to learn how to use git and gith
 
 You can fork and pull request. You welcome!
 
-[Site](http://tkovs.github.io/cbrainfuck/)
-
-Me
---------
-
-    Vitor Rodrigues
-    victor.rdg@hotmail.com
-
 Contributing
 --------
 
