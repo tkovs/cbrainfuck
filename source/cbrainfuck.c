@@ -11,8 +11,6 @@ int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* 
 		(*input_file) = fopen(input_file_name, "r");
 		if ((*input_file) == NULL)
 		{
-			_ERRORS_++;
-
 			fclose((*code_file));
 			report ("Couldn't open input file");
 			return 1;
@@ -20,8 +18,6 @@ int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* 
 	}
 	else
 	{
-		_ERRORS_++;
-
 		report ("Couldn't open code file");
 		return 1;
 	}
@@ -167,5 +163,6 @@ char* interpreter(char* code_file_name, char* input_file_name)
 }
 
 void report(char *msg) {
-	_MESSAGE_ = msg;
+    _ERRORS_ = 1;
+    _MESSAGE_ = msg;
 }
