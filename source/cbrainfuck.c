@@ -85,6 +85,9 @@ char* interpreter(char* code_file_name, char* input_file_name)
 
 		switch(c)
 		{
+			case '#':
+				fscanf(fcode, "%*[^\n]s");
+				break;
 			case '+':
 				fuckinglist->value++;
 				break;
