@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/cbrainfuck.h"
 
 #define NEXT '>'
@@ -74,6 +75,7 @@ char* interpreter(char* code_file_name, char* input_file_name)
 	List *fuckinglist = NULL;
 	char c; // to scan
 	char *result; // Message from code
+	char temp[64];
 	short int countscan = 0; // Number of scans
 	short int length = 0; // Number of bracket '['
 	short int countpoint = 1; // Number of '.'
@@ -96,25 +98,41 @@ char* interpreter(char* code_file_name, char* input_file_name)
 		switch(c)
 		{
 			case COMMENT:
-				fscanf(fcode, "%*[^\n]s");
+				// Get the string after of #
+				fgets(temp, 64, fcode);
+				// Add the amount of letter of comment to the countscan variable
+				countscan += strlen(temp);
+
 				break;
+
 			case INCREMENT:
+				// Increment the cell value
 				fuckinglist->value++;
 				break;
 
 			case DECREMENT:
+				// Decrement the cell value
 				fuckinglist->value--;
 				break;
 
 			case NEXT:
+				// If there is not a next element, create it
 				if (fuckinglist->next == NULL)
 				{
 					create(fuckinglist);
 				}
+				// Move the pointer to the next element
 				fuckinglist = fuckinglist->next;
 				break;
 
 			case PREVIOUS:
+				// Checks for a previous element
+				if (fuckinglist->prev == NULL)
+				{
+					report("Trying to access element -1, he doesn't exists.");
+					return NULL;
+				}
+				// Move the pointer to the previous element
 				fuckinglist = fuckinglist->prev;
 				break;
 
