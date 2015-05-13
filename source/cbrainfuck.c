@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include "../include/cbrainfuck.h"
 
+#define NEXT '>'
+#define PREVIOUS '<'
+#define INCREMENT '+'
+#define DECREMENT '-'
+#define COMMENT '#'
+#define PRINT '.'
+#define SCAN ','
+#define OPENLOOP '['
+#define CLOSELOOP ']'
+
 int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
 {
 	(*code_file) = fopen(code_file_name, "r");
@@ -85,18 +95,18 @@ char* interpreter(char* code_file_name, char* input_file_name)
 
 		switch(c)
 		{
-			case '#':
+			case COMMENT:
 				fscanf(fcode, "%*[^\n]s");
 				break;
-			case '+':
+			case INCREMENT:
 				fuckinglist->value++;
 				break;
 
-			case '-':
+			case DECREMENT:
 				fuckinglist->value--;
 				break;
 
-			case '>':
+			case NEXT:
 				if (fuckinglist->next == NULL)
 				{
 					create(fuckinglist);
@@ -104,11 +114,11 @@ char* interpreter(char* code_file_name, char* input_file_name)
 				fuckinglist = fuckinglist->next;
 				break;
 
-			case '<':
+			case PREVIOUS:
 				fuckinglist = fuckinglist->prev;
 				break;
 
-			case '.':
+			case PRINT:
 				if (fuckinglist->value == 0) break;
 				result[countpoint-1] = fuckinglist->value;
 				countpoint++;
@@ -116,11 +126,11 @@ char* interpreter(char* code_file_name, char* input_file_name)
 				result[countpoint-1] = '\0';
 				break;
 
-			case ',':
+			case SCAN:
 				fscanf (finput, "%c", &fuckinglist->value);
 				break;
 
-			case '[':
+			case OPENLOOP:
 				if (fuckinglist->value == 0) {
 					int nested = 1;
 					while(nested) {
@@ -138,7 +148,7 @@ char* interpreter(char* code_file_name, char* input_file_name)
 				brackets[length-1] = countscan;
 				break;
 
-			case ']':
+			case CLOSELOOP:
 				if (fuckinglist->value != 0)
 				{
 					fseek(fcode, brackets[length-1], SEEK_SET);
