@@ -19,16 +19,12 @@ As I do not have much experience with advanced C language, the code is easy to r
 7. Enjoy a refreshing Dollynho and wait.
 ```
 
+[Some sources](http://esoteric.sange.fi/brainfuck/)
+
 How to use
 --------
 
-Need only the source and include folders in your project folder.
-Add your program in your project folder.
-In your code, reference the *include/cbrainfuck.h* file.
-Create a text file with the brainfuck code.
-Create a text file with content to be read when a comma is found in brainfuck code (or use */dev/stdin* in linux).
-
-In your C code to call the interpreter function. The interpreter function returns a string with the result of the interpretation of brainfuck code. The interpreter function takes two parameters: the first is the address of the text file and the second the address of the input file (or */dev/stdin*).
+**Building**
 
 A example:
 
