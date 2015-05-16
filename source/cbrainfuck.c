@@ -73,22 +73,21 @@ char* interpreter(char* code_file_name, char* input_file_name)
 	FILE *finput = NULL;
 	int *brackets = NULL;
 	List *fuckinglist = NULL;
-	char c; // to scan
-	char *result; // Message from code
-	char temp[64];
+	char *result = NULL, c;
+	char temp[64]; // Read string of the comments
 	short int countscan = 0; // Number of scans
-	short int length = 0; // Number of bracket '['
 	short int countpoint = 1; // Number of '.'
+	short int length = 0; // Number of bracket '['
 
 	if (open_files(&fcode, code_file_name, &finput, input_file_name) == 1)
 	{
 		return NULL;
 	}
 
-	result = (char *) malloc (countpoint * sizeof(char));
-	result[countpoint-1] = '\0';
+	result = (char *) malloc (sizeof(char));
+	result[0] = '\0';
 	brackets = (int *) malloc (sizeof(int));
-	fuckinglist = (List *) malloc (2 * sizeof(List));
+	fuckinglist = (List *) malloc (sizeof(List));
 	initialize(fuckinglist);
 
 	while((c = fgetc(fcode)) != EOF)
@@ -98,41 +97,34 @@ char* interpreter(char* code_file_name, char* input_file_name)
 		switch(c)
 		{
 			case COMMENT:
-				// Get the string after of #
 				fgets(temp, 64, fcode);
-				// Add the amount of letter of comment to the countscan variable
 				countscan += strlen(temp);
-
 				break;
 
 			case INCREMENT:
-				// Increment the cell value
 				fuckinglist->value++;
 				break;
 
 			case DECREMENT:
-				// Decrement the cell value
 				fuckinglist->value--;
 				break;
 
 			case NEXT:
-				// If there is not a next element, create it
 				if (fuckinglist->next == NULL)
 				{
 					create(fuckinglist);
 				}
-				// Move the pointer to the next element
+
 				fuckinglist = fuckinglist->next;
 				break;
 
 			case PREVIOUS:
-				// Checks for a previous element
 				if (fuckinglist->prev == NULL)
 				{
 					report("Trying to access element -1, he doesn't exists.");
 					return NULL;
 				}
-				// Move the pointer to the previous element
+
 				fuckinglist = fuckinglist->prev;
 				break;
 

@@ -11,7 +11,7 @@
 ** Constants to save information
 **
 ** _ERRORS_: 0 to nothing 1 or more to error
-** _MESSAGE_: error's message
+** _MESSAGE_: error message
 */
 
 int _ERRORS_;
