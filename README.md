@@ -2,7 +2,7 @@ cbrainfuck
 =====
 [![Build Status](https://travis-ci.org/tkovs/cbrainfuck.svg?branch=master)](https://travis-ci.org/tkovs/cbrainfuck)
 [![Issues](https://img.shields.io/github/issues/tkovs/cbrainfuck.svg)](https://github.com/tkovs/cbrainfuck/issues)
-[![Licence](https://img.shields.io/badge/licence-MIT-red.svg?style=flat)](LICENSE)
+[![Licence](https://img.shields.io/badge/licence-MIT-red.svg?style=flat)](LICENCE)
 
 `cbrainfuck` is a brainfuck interpreter written in C
 
