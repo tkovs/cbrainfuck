@@ -20,9 +20,9 @@ cbrainfuck
 // argv[2] should be the input file
 int main(int argc, char **argv) {
     char *s;
-    s = interpreter(argv[1], argc>2?argv[2]:"/dev/stdin");
+    s = interpreter(argv[1], (argc > 2 ? argv[2] : "/dev/stdin"));
 
-    if (_ERRORS_ > 0) {
+    if (_ERRORS_) {
         fprintf(stderr, "%s\n", _MESSAGE_);
         return 1;
     } else {
