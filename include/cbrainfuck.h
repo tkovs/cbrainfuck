@@ -26,9 +26,9 @@ char *_MESSAGE_;
 
 typedef struct mylist List;
 struct mylist {
-	char value;
-	List *next;
-	List *prev;
+    char value;
+    List *next;
+    List *prev;
 };
 
 /******************* open_files ********************
