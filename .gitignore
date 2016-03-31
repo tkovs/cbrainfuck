@@ -8,6 +8,9 @@
 *.gch
 *.pch
 
+# Vim
+*.swp
+
 # Libraries
 *.lib
 *.a
