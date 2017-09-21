@@ -13,13 +13,13 @@
 #define OPENLOOP '['
 #define CLOSELOOP ']'
 
-int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
+int open_files (FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
 {
-    (*code_file) = fopen(code_file_name, "r");
+    (*code_file) = fopen (code_file_name, "r");
 
     if ((*code_file) != NULL)
     {
-        (*input_file) = fopen(input_file_name, "r");
+        (*input_file) = fopen (input_file_name, "r");
         if ((*input_file) == NULL)
         {
             fclose((*code_file));
@@ -36,34 +36,34 @@ int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* 
     return 0;
 }
 
-void initialize(List *list)
+void initialize (List *list)
 {
     list->value = 0;
     list->next = NULL;
     list->prev = NULL;
 }
 
-void create(List *list)
+void create (List *list)
 {
     List *newlist;
 
-    newlist = (List *) malloc (sizeof(List));
-    initialize(newlist);
+    newlist = (List *) malloc (sizeof (List));
+    initialize (newlist);
 
     newlist->prev = list;
     list->next = newlist;
 }
 
-void liberate(List *list)
+void liberate (List *list)
 {
     if (list != NULL)
     {
-        liberate(list->next);
-        free(list);
+        liberate (list->next);
+        free (list);
     }
 }
 
-char* interpreter(char* code_file_name, char* input_file_name)
+char* interpreter (char* code_file_name, char* input_file_name)
 {
     _ERRORS_ = 0;
     free(_MESSAGE_);
@@ -84,21 +84,21 @@ char* interpreter(char* code_file_name, char* input_file_name)
         return NULL;
     }
 
-    result = (char *) malloc (sizeof(char));
+    result = (char *) malloc (sizeof (char));
     result[0] = '\0';
-    brackets = (int *) malloc (sizeof(int));
-    fuckinglist = (List *) malloc (sizeof(List));
-    initialize(fuckinglist);
+    brackets = (int *) malloc (sizeof (int));
+    fuckinglist = (List *) malloc (sizeof (List));
+    initialize (fuckinglist);
 
-    while((c = fgetc(fcode)) != EOF)
+    while((c = fgetc (fcode)) != EOF)
     {
         countscan++;
 
-        switch(c)
+        switch (c)
         {
             case COMMENT:
-                fgets(temp, 64, fcode);
-                countscan += strlen(temp);
+                fgets (temp, 64, fcode);
+                countscan += strlen (temp);
                 break;
 
             case INCREMENT:
@@ -112,7 +112,7 @@ char* interpreter(char* code_file_name, char* input_file_name)
             case NEXT:
                 if (fuckinglist->next == NULL)
                 {
-                    create(fuckinglist);
+                    create (fuckinglist);
                 }
 
                 fuckinglist = fuckinglist->next;
@@ -132,7 +132,7 @@ char* interpreter(char* code_file_name, char* input_file_name)
                 if (fuckinglist->value == 0) break;
                 result[countpoint-1] = fuckinglist->value;
                 countpoint++;
-                result = (char *) realloc (result, countpoint * sizeof(char));
+                result = (char *) realloc (result, countpoint * sizeof (char));
                 result[countpoint-1] = '\0';
                 break;
 
@@ -143,7 +143,7 @@ char* interpreter(char* code_file_name, char* input_file_name)
             case OPENLOOP:
                 if (fuckinglist->value == 0) {
                     int nested = 1;
-                    while(nested) {
+                    while (nested) {
                         char c1;
                         fscanf (fcode, "%c", &c1);
                         countscan++;
@@ -154,20 +154,20 @@ char* interpreter(char* code_file_name, char* input_file_name)
                 }
 
                 length++;
-                brackets = (int *) realloc (brackets, length * sizeof(int));
+                brackets = (int *) realloc (brackets, length * sizeof (int));
                 brackets[length-1] = countscan;
                 break;
 
             case CLOSELOOP:
                 if (fuckinglist->value != 0)
                 {
-                    fseek(fcode, brackets[length-1], SEEK_SET);
+                    fseek (fcode, brackets[length-1], SEEK_SET);
                     countscan = brackets[length-1];
                 }
                 else
                 {
                     length--;
-                    brackets = (int *) realloc (brackets, length * sizeof(int));
+                    brackets = (int *) realloc (brackets, length * sizeof (int));
                 }
                 break;
         }
@@ -176,16 +176,16 @@ char* interpreter(char* code_file_name, char* input_file_name)
 
     while (fuckinglist->prev != NULL)
         fuckinglist = fuckinglist->prev;
-    liberate(fuckinglist);
+    liberate (fuckinglist);
 
-    fclose(fcode);
-    fclose(finput);
+    fclose (fcode);
+    fclose (finput);
 
     result[countpoint-1] = '\0';
     return result;
 }
 
-void report(char *msg) {
+void report (char *msg) {
     _ERRORS_ = 1;
     _MESSAGE_ = msg;
 }

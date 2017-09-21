@@ -44,7 +44,7 @@ struct mylist {
 ** 
 */
 
-int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name);
+int open_files (FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name);
 
 /******************* initialize ********************
 ** This function just initializes the list data
@@ -57,7 +57,7 @@ int open_files(FILE** code_file, char* code_file_name, FILE** input_file, char* 
 ** prev = NULL
 */
 
-void initialize(List *element);
+void initialize (List *element);
 
 /********************* create **********************
 ** This function add a new element in the list
@@ -65,7 +65,7 @@ void initialize(List *element);
 ** element: the list made in main.c
 */
 
-void create(List *element);
+void create (List *element);
 
 /********************** liberate ***********************
 ** This function frees all memory used by the list using
@@ -74,7 +74,7 @@ void create(List *element);
 ** element: the list made in main.c
 */
 
-void liberate(List *element);
+void liberate (List *element);
 
 /********************** intepreter ***********************
 ** This function interprets the brainfuck code file and
@@ -82,7 +82,7 @@ void liberate(List *element);
 ** 
 */
 
-char* interpreter(char* code_file_name, char* input_file_name);
+char* interpreter (char* code_file_name, char* input_file_name);
 
 /************************ report *************************
 ** This function writes in the global variable MESSAGE any
@@ -90,6 +90,6 @@ char* interpreter(char* code_file_name, char* input_file_name);
 ** 
 */
 
-void report(char *msg);
+void report (char *msg);
 
 #endif
