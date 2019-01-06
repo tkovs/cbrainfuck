@@ -3,16 +3,6 @@
 #include <string.h>
 #include "../include/cbrainfuck.h"
 
-#define NEXT '>'
-#define PREVIOUS '<'
-#define INCREMENT '+'
-#define DECREMENT '-'
-#define COMMENT '#'
-#define PRINT '.'
-#define SCAN ','
-#define OPENLOOP '['
-#define CLOSELOOP ']'
-
 int open_files (FILE** code_file, char* code_file_name, FILE** input_file, char* input_file_name)
 {
     (*code_file) = fopen (code_file_name, "r");
